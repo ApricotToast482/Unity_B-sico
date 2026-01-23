@@ -6,12 +6,18 @@ using UnityEngine.InputSystem;
 public class Controler : MonoBehaviour
 {
     [SerializeField] private int _playerSpeed;
-    private Vector2 _input;
+    [SerializeField] private float _speedMultiplier;
     [SerializeField] private float _SmoothTime;
+    private float _NewSpeed;
+
+    private Vector2 _input;
     private Vector2 _FixedInput;
+    private Vector2 _currentVelocity = Vector2.zero;
+    private float _isRunning;
+
     private PlayerInput _playerInput;
     private Rigidbody2D _r2d2;
-    private Vector2 _currentVelocity = Vector2.zero;
+
     void Start()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -21,8 +27,9 @@ public class Controler : MonoBehaviour
     void Update()
     {
         ReadInput();
+        ApplySpeed();
 
-        Debug.Log("Input: " + _input);
+        Debug.Log(_NewSpeed);
 
         //transform.position += new Vector3(_input.x, _input.y, 0) * _playerSpeed * Time.deltaTime;
     } 
@@ -31,7 +38,23 @@ public class Controler : MonoBehaviour
     {
         Move();
     }
+    private void readInput()
+    {
+        _input = _playerInput.actions["Move"].ReadValue<Vector2>();
+        _isRunning = _playerInput.actions["Run"].ReadValue<float>();
+    }
 
+    private void ApplySpeed()
+    {
+        if (_isRunning != 0)
+        {
+            _NewSpeed = _playerSpeed * _speedMultiplier;
+        }
+        else
+        {
+            _NewSpeed = _playerSpeed;
+        }
+    }
     private void Move()
     {
         //_r2d2.velocity = new Vector3(_input.x, _input.y, 0) * _playerSpeed * Time.deltaTime;
@@ -45,7 +68,7 @@ public class Controler : MonoBehaviour
         //Vector2 fixedInput = Vector2.SmoothDamp(_r2d2.position, _r2d2.position + _input, ref _currentVelocity, float _SmoothTime, 1, float Time.fixedDeltaTime);
         _FixedInput = Vector2.SmoothDamp(_FixedInput, _input, ref _currentVelocity, _SmoothTime);
         //_r2d2.MovePosition(_r2d2.position + fixedInput * _playerSpeed);
-        _r2d2.MovePosition(_r2d2.position + _FixedInput * _playerSpeed * Time.fixedDeltaTime);
+        _r2d2.MovePosition(_r2d2.position + _FixedInput * _NewSpeed * Time.fixedDeltaTime);
     }
 
     private void ReadInput()
