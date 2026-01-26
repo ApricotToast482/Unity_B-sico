@@ -5,16 +5,27 @@ using UnityEngine.InputSystem;
 
 public class Controler : MonoBehaviour
 {
+    //Variables de movimiento
+    [Header("Movimiento")]
     [SerializeField] private int _playerSpeed;
     [SerializeField] private float _speedMultiplier;
     [SerializeField] private float _SmoothTime;
     private float _NewSpeed;
 
+    //Variables de disparo
+    [Header("Disparo")]
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private float _shootCooldown;
+    private float _isShooting;
+    private float _shoottimer;
+
+    //Logica de Movimiento
     private Vector2 _input;
     private Vector2 _FixedInput;
     private Vector2 _currentVelocity = Vector2.zero;
     private float _isRunning;
 
+    //Componentes
     private PlayerInput _playerInput;
     private Rigidbody2D _r2d2;
 
@@ -26,10 +37,18 @@ public class Controler : MonoBehaviour
 
     void Update()
     {
-        ReadInput();
+        readInput();
         ApplySpeed();
 
-        Debug.Log(_NewSpeed);
+        //Disparar
+        _shoottimer += Time.deltaTime;
+        if (_shoottimer >= _shootCooldown)
+        {
+            _shoottimer = 0;
+            Debug.Log("Disparando");
+            Shoot();
+        }
+
 
         //transform.position += new Vector3(_input.x, _input.y, 0) * _playerSpeed * Time.deltaTime;
     } 
@@ -42,6 +61,7 @@ public class Controler : MonoBehaviour
     {
         _input = _playerInput.actions["Move"].ReadValue<Vector2>();
         _isRunning = _playerInput.actions["Run"].ReadValue<float>();
+        _isShooting = _playerInput.actions["Shoot"].ReadValue < float>();
     }
 
     private void ApplySpeed()
@@ -71,10 +91,12 @@ public class Controler : MonoBehaviour
         _r2d2.MovePosition(_r2d2.position + _FixedInput * _NewSpeed * Time.fixedDeltaTime);
     }
 
-    private void ReadInput()
+    private void Shoot()
     {
-        _input = _playerInput.actions["Move"].ReadValue<Vector2>();
-
+        if (_isShooting != 0)
+        {
+            Instantiate(_bullet, transform.position, transform.rotation);
+        }
     }
     
 
