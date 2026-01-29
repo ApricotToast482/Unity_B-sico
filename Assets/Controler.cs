@@ -25,14 +25,18 @@ public class Controler : MonoBehaviour
     private Vector2 _currentVelocity = Vector2.zero;
     private float _isRunning;
 
+    //Logica de animaciones
+
     //Componentes
     private PlayerInput _playerInput;
     private Rigidbody2D _r2d2;
+    private Animator _animator;
 
     void Start()
     {
         _playerInput = GetComponent<PlayerInput>();
         _r2d2 = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -48,6 +52,8 @@ public class Controler : MonoBehaviour
             Debug.Log("Disparando");
             Shoot();
         }
+
+        _animator.SetFloat("input x", _input.x);
 
 
         //transform.position += new Vector3(_input.x, _input.y, 0) * _playerSpeed * Time.deltaTime;
@@ -89,6 +95,8 @@ public class Controler : MonoBehaviour
         _FixedInput = Vector2.SmoothDamp(_FixedInput, _input, ref _currentVelocity, _SmoothTime);
         //_r2d2.MovePosition(_r2d2.position + fixedInput * _playerSpeed);
         _r2d2.MovePosition(_r2d2.position + _FixedInput * _NewSpeed * Time.fixedDeltaTime);
+
+
     }
 
     private void Shoot()
