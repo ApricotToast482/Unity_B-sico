@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class AIbehaviour : MonoBehaviour
 {
@@ -15,15 +16,57 @@ public class AIbehaviour : MonoBehaviour
     [SerializeField] private GameObject _enemyBullet;
     private float _minTime = 0.5f;
     private float _maxTime = 1.5f;
-
-    void Start()
+    private float _shootTimer;
+    private void Start()
     {
-        
+        //Tiempo inicial
+        _shootTimer = Random.Range(_minTime, _maxTime);
+
+        //Limite de la pantalla
+        Vector3 screenValues = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
+        _screenBounds = Camera.main.ScreenToWorldPoint(screenValues);
+
+        //Tamanio del enemigo
+        _collider2D = GetComponent<Collider2D>();
+        _enemyWidth = _collider2D.bounds.extents.x;
+
+        //Posicion Inicial
+        SetRandomXPosition();
+    }
+    
+    private void Update()
+    {
+        transform.Translate(Vector3.down  * _enemyYSpeed * Time.deltaTime);
+
+        Move();
+        Shoot();
+    }
+    private void Move()
+    {
+        float speed = _enemyXSpeed * Time.deltaTime;
+        float newXPosition = Mathf.MoveTowards(transform.position.x, _targetXPosition, speed);
+        transform.position = new Vector3(newXPosition, transform.position.y, transform.position.z);
+
+        if (Mathf.Abs(transform.position.x - _targetXPosition) < 0.1f)
+        {
+            SetRandomXPosition();
+        }
+    }
+    private void Shoot()
+    {
+        _shootTimer -= Time.deltaTime;
+
+        if (_shootTimer <= 0)
+        {
+            Instantiate(_enemyBullet, transform.position, transform.rotation);
+            _shootTimer = Random.Range(_minTime, _maxTime);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetRandomXPosition()
     {
-        
+        _targetXPosition = Random.Range(-_screenBounds.x + _enemyWidth, _screenBounds.x - _enemyWidth);
     }
+
+
 }

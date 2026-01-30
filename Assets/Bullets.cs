@@ -1,11 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed;
+    private Collider2D _collider;
+
+    private void Start()
+    {
+        _collider = GetComponent<Collider2D>();
+    }
 
     private void Update()
     {
@@ -13,9 +17,22 @@ public class Bullets : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals ("Enemy"))
+        if (collision.CompareTag("Enemy") && !_collider.tag.Equals("Enemy"))
         {
-            Destroy(gameObject);
+            EnemyHealth health = collision.GetComponent<EnemyHealth>();
+            if (health != null)
+            {
+                Debug.Log("Llamando al metodo");
+                health.DMG();
+            }
+
+            Destroy(this.gameObject);
+
+        }
+
+        if (collision.CompareTag("Bullet"))
+        {
+            Destroy (this.gameObject);
         }
     }
 }

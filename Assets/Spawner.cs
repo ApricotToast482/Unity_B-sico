@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Spawner : MonoBehaviour
 {
@@ -18,9 +15,9 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        _spawnTime -= Time.deltaTime;
+        _spawnTimer -= Time.deltaTime;
 
-        if (_spawnTime <= 0)
+        if (_spawnTimer <= 0)
         {
             SpawnEnemy();
             _spawnTimer = _spawnTime;
@@ -36,8 +33,10 @@ public class Spawner : MonoBehaviour
     private Vector2 GetPosition()
     {
         Bounds bounds = _boxCollider.bounds;
-        float randomX = bounds.min.x;
-        float randomY = bounds.min.y;
+        //float randomX = bounds.min.x;
+        float randomX = Random.Range(bounds.min.x, bounds.max.x);
+        //float randomY = bounds.min.y;
+        float randomY = Random.Range(bounds.min.y, bounds.max.y);
         return new Vector2(randomX, randomY);
     }
 }

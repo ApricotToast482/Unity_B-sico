@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4221320032280775747}
   - component: {fileID: 797122179541977438}
   - component: {fileID: 1939618326648783475}
+  - component: {fileID: 1202312606064394170}
+  - component: {fileID: 3785291947286216239}
   m_Layer: 0
   m_Name: enemy_2_b_m
   m_TagString: Enemy
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9fd6d24f8e165194a9fa9462fbd5ddd4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9811321, g: 0.9570666, b: 0.9601583, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -274,3 +276,32 @@ PolygonCollider2D:
       - {x: 0.45273, y: -0.062209945}
       - {x: 0.45337754, y: 0.047432203}
   m_UseDelaunayMesh: 0
+--- !u!114 &1202312606064394170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7771640724324868076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550ce9eb05624b247a57e385edefb056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyYSpeed: 1
+  _enemyXSpeed: 2
+  _enemyBullet: {fileID: 6512194697736305994, guid: 772a482de4aa0c140b1417bd395f3f03, type: 3}
+--- !u!114 &3785291947286216239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7771640724324868076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a033f16a230f2bb4dbafb2c591424dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 20
+  _bulletDMG: 5
