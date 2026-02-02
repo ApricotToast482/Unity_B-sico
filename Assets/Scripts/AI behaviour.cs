@@ -40,6 +40,13 @@ public class AIbehaviour : MonoBehaviour
 
         Move();
         Shoot();
+    
+        {
+            if (transform.position.y < -8f)
+            {
+            Destroy(gameObject);
+            }
+        }
     }
     private void Move()
     {
@@ -69,4 +76,6 @@ public class AIbehaviour : MonoBehaviour
     }
 
 
+    
 }
+
