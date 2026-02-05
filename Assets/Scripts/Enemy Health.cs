@@ -22,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
 
         if (_currentHP <= 0)
         {
-            FindObjectOfType<ChangeLVL>().contadorElim++;
             Destroy(gameObject);
 
         }

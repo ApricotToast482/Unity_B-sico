@@ -16,10 +16,9 @@ public class Bullets : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 1. SI LA BALA CHOCA CON UN ENEMIGO
+
         if (collision.CompareTag("EnemyShip"))
         {
-            // SOLO hace daño si la bala es del JUGADOR
             if (gameObject.CompareTag("Bullet"))
             {
                 EnemyHealth health = collision.GetComponent<EnemyHealth>();
@@ -27,21 +26,22 @@ public class Bullets : MonoBehaviour
                 {
                     health.DMG();
                 }
-                Destroy(this.gameObject); // La bala desaparece al impactar
+                Destroy(this.gameObject); 
             }
-            // Si la bala es "EnemyBullet", no hace nada (atraviesa a sus aliados)
+
         }
 
-        // 2. SI LA BALA CHOCA CON EL MURO (DESPAWNER)
+
         if (collision.CompareTag("Dspawn"))
         {
             Destroy(this.gameObject);
         }
 
-        // 3. SI LAS BALAS CHOCAN ENTRE ELLAS (Opcional)
+
         if (collision.CompareTag("Enemy"))
         {
             Destroy(this.gameObject);
         }
+
     }
 }

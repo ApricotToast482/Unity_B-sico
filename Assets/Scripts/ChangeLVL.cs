@@ -3,19 +3,16 @@ using UnityEngine.SceneManagement;
 public class ChangeLVL : MonoBehaviour
 {
     [Header("Cambio de nivel")]
-    public int enemigosparaboss = 15;
-    public int contadorElim = 0;
-    public void ContadorEliminaciones()
+    public float _Tiempo4Boss;
+    private float _cronos =0f;
+    private void Update()
     {
-        contadorElim++;
-        if (contadorElim >= enemigosparaboss)
+        _cronos += Time.deltaTime;
+
+        if (_cronos >= _Tiempo4Boss)
         {
-            Bossfight();
+            Debug.Log ("Ya viene el boss");
+            SceneManager.LoadScene (3);
         }
-    }
-    void Bossfight()
-    {
-         Debug.Log("¡Meta alcanzada! Intentando cargar: BossScene");
-        SceneManager.LoadScene("FinalBoss");
     }
 }
