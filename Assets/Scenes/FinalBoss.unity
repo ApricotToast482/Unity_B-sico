@@ -355,6 +355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 3198545495559091212, guid: 3f1a7a8d323b786469ca63732009fab9, type: 3}
+      propertyPath: VidaTotal
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3449241301640116312, guid: 3f1a7a8d323b786469ca63732009fab9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.71
@@ -412,7 +416,7 @@ GameObject:
   - component: {fileID: 1150592145}
   m_Layer: 0
   m_Name: DespawnBalas (1)
-  m_TagString: Enemy
+  m_TagString: Dspawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -534,6 +538,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5047592246092495420, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
+      propertyPath: _shootCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356201353551283744, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
+      propertyPath: _health
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -551,7 +563,7 @@ GameObject:
   - component: {fileID: 1777315122}
   m_Layer: 0
   m_Name: DespawnBalas
-  m_TagString: Enemy
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
