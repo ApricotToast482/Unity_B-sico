@@ -130,8 +130,9 @@ GameObject:
   - component: {fileID: 332837207}
   - component: {fileID: 332837206}
   - component: {fileID: 332837208}
+  - component: {fileID: 332837209}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Spawner
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,6 +213,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 7771640724324868076, guid: ac8353b78a5dc524a92bc4332ae948e3, type: 3}
   _spawnTime: 3
+--- !u!114 &332837209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332837205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4f315df140df140b1706f1c131452a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoDeVida: 63
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +538,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8dbb699a50cf44cb4afa256b59248f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1209501028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209501030}
+  - component: {fileID: 1209501029}
+  m_Layer: 0
+  m_Name: DespawnBalas
+  m_TagString: EnemyShip
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1209501029
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209501028}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1209501030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209501028}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: 7.98, z: -0.10476}
+  m_LocalScale: {x: 39.676666, y: 1.8927, z: 1.8927}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1366923283
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b97a14bf7dd2684b90f8d89a31c1d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Tiempo4Boss: 4
+  _Tiempo4Boss: 60
 --- !u!4 &1366923286
 Transform:
   m_ObjectHideFlags: 0
@@ -679,18 +746,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 605679721318989736, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.66412
-      objectReference: {fileID: 0}
-    - target: {fileID: 605679721318989736, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.66412
-      objectReference: {fileID: 0}
-    - target: {fileID: 605679721318989736, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.66412
-      objectReference: {fileID: 0}
-    - target: {fileID: 605679721318989736, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.09
       objectReference: {fileID: 0}
@@ -750,3 +805,4 @@ SceneRoots:
   - {fileID: 1089516879}
   - {fileID: 1366923286}
   - {fileID: 1778058995}
+  - {fileID: 1209501030}

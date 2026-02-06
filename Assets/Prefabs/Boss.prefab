@@ -208,8 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1246bbf802193fd4ca99799178bcdfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VidaTotal: 10
-  Velocidad: 0.5
+  "_da\xF1oBala": 3
+  VidaTotal: 250
+  Velocidad: 0.1
   DistanciaMovimiento: 3
+  VelocidadEntrada: 0.5
+  PosicionDestinoY: 5
   EnemyPrefab: {fileID: 7771640724324868076, guid: ac8353b78a5dc524a92bc4332ae948e3, type: 3}
   TiempoDeSpawn: 5
+  _enemyBullet: {fileID: 4433217716533405213, guid: 56f338aa32e2e5348b87bdb7c8ce0d2e, type: 3}

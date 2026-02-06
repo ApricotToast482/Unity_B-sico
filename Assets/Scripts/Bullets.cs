@@ -6,7 +6,10 @@ public class Bullets : MonoBehaviour
     [SerializeField] private float _bulletSpeed;
     // No necesitas guardar el _collider para comparar tags, 
     // puedes usar gameObject.CompareTag
-
+    private void Start()
+    {
+        Destroy(gameObject, 2.5f);
+    }
     private void Update()
     {
         // Vector3.up moverá la bala hacia arriba. 

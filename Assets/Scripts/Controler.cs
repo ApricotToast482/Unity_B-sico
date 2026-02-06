@@ -24,6 +24,7 @@ public class Controler : MonoBehaviour
     private Vector2 _FixedInput;
     private Vector2 _currentVelocity = Vector2.zero;
     private float _isRunning;
+    public static Vector3 posicionParaElBoss;
 
     //Logica de animaciones
 
@@ -37,6 +38,10 @@ public class Controler : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         _r2d2 = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+         if (posicionParaElBoss != Vector3.zero)
+        {
+            transform.position = posicionParaElBoss;
+        }
     }
 
     void Update()
@@ -89,7 +94,7 @@ public class Controler : MonoBehaviour
 
         //_r2d2.MovePosition(_r2d2.position + new Vector2(_input.x, _input.y) * _playerSpeed * Time.fixedDeltaTime);
 
-        //_r2d2.AddForce(new Vector2 (_input.x, _input.y) * _playerSpeed); //Colisión, se le agrega una fuerza que no se detiene ni empieza inmediatamente
+        //_r2d2.AddForce(new Vector2 (_input.x, _input.y) * _playerSpeed); //Colisiï¿½n, se le agrega una fuerza que no se detiene ni empieza inmediatamente
 
         //Vector2 fixedInput = Vector2.SmoothDamp(_r2d2.position, _r2d2.position + _input, ref _currentVelocity, float _SmoothTime, 1, float Time.fixedDeltaTime);
         _FixedInput = Vector2.SmoothDamp(_FixedInput, _input, ref _currentVelocity, _SmoothTime);

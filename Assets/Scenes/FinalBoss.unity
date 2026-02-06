@@ -356,16 +356,16 @@ PrefabInstance:
       value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 3198545495559091212, guid: 3f1a7a8d323b786469ca63732009fab9, type: 3}
-      propertyPath: VidaTotal
-      value: 100
+      propertyPath: "_da\xF1oBala"
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3449241301640116312, guid: 3f1a7a8d323b786469ca63732009fab9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.71
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3449241301640116312, guid: 3f1a7a8d323b786469ca63732009fab9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.97
+      value: 8.79
       objectReference: {fileID: 0}
     - target: {fileID: 3449241301640116312, guid: 3f1a7a8d323b786469ca63732009fab9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -540,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5047592246092495420, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
       propertyPath: _shootCooldown
-      value: 0.1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8356201353551283744, guid: 433b1ceacb2af284e826a7a43efabd0d, type: 3}
       propertyPath: _health
@@ -577,7 +577,7 @@ Transform:
   m_GameObject: {fileID: 1777315119}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 10.03, z: 0.01264362}
+  m_LocalPosition: {x: -0.51, y: 6.64, z: 0.01264362}
   m_LocalScale: {x: 32.697422, y: 3.4124837, z: 6.658505}
   m_ConstrainProportionsScale: 0
   m_Children: []

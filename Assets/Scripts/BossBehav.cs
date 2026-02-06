@@ -6,62 +6,86 @@ using UnityEngine.SceneManagement;
 public class BossBehav : MonoBehaviour 
 {
     [Header("Estadisticas del Boss")]
+    [SerializeField] private float _dañoBala;
     public float VidaTotal;
     public float Velocidad;
     public float DistanciaMovimiento;
 
-    [Header("Fase de Entrada (Nuevo)")]
-    public float VelocidadEntrada;    // Qué tan rápido baja al principio
-    public float PosicionDestinoY; // Altura donde se queda para pelear
-    private bool haLlegado = false;       // Controla si ya terminó de entrar
+    [Header("Fase de Entrada")]
+    public float VelocidadEntrada;
+    public float PosicionDestinoY;
+    private bool haLlegado = false;
+    private float tiempoBatalla = 0f;
 
     [Header("Spawner")]
     public GameObject EnemyPrefab;
     public float TiempoDeSpawn;
 
+    [Header("Disparo del Boss")]
+    [SerializeField] private GameObject _enemyBullet;
+    private float _minTime = .5f;
+    private float _maxTime = 1.5f;
+    private float _shootTimer;
+    private float _enemyWidth;
+    private Collider2D _collider2D;
     private SpriteRenderer sp;
 
     void Start()
     {
         sp = GetComponent<SpriteRenderer>();
 
-        // El spawner empezará a funcionar desde que aparece
+        _collider2D = GetComponent<Collider2D>();
+        _enemyWidth = _collider2D.bounds.extents.x;
+        _shootTimer = Random.Range(_minTime, _maxTime);
         InvokeRepeating("CrearEsbirro", 2f, TiempoDeSpawn);
+
     }
 
     void Update()
     {
-        // Si aún no ha llegado a su posición de batalla, baja
+
         if (!haLlegado)
         {
             EntrarAEscena();
         }
         else
-        {
-            // Una vez que llega, empieza el movimiento lateral
+        {   
+            tiempoBatalla += Time.deltaTime;
             MovimientoDeBatalla();
+
+            Shoot();
         }
     }
 
     void EntrarAEscena()
     {
-        // Mueve el objeto hacia abajo
-        transform.Translate(Vector3.down * VelocidadEntrada * Time.deltaTime);
 
-        // Si la posición actual en Y es menor o igual a la de destino, se detiene
+        transform.Translate(Vector3.down * VelocidadEntrada * Time.deltaTime);
         if (transform.position.y <= PosicionDestinoY)
         {
             haLlegado = true;
-            // Forzamos la posición exacta para evitar que se pase de largo
-            transform.position = new Vector3(transform.position.x, PosicionDestinoY, transform.position.z);
+
+            transform.position = new Vector3(0, PosicionDestinoY,0);
         }
     }
 
+    private void Shoot()
+    {
+        _shootTimer -= Time.deltaTime;
+
+        if (_shootTimer <= 0)
+        {
+            float randomX = Random.Range(-_enemyWidth, _enemyWidth);
+            Vector3 postDisparo = transform.position + new Vector3(randomX, -1f,0 );
+
+            Instantiate (_enemyBullet, postDisparo, transform.rotation);
+
+            _shootTimer = Random.Range(_minTime, _maxTime);
+        }
+    }
     void MovimientoDeBatalla()
     {
-        // Movimiento lateral PingPong
-        // Importante: En el nuevo Vector3 usamos 'PosicionDestinoY' para que no se mueva arriba/abajo
-        float x = Mathf.PingPong(Time.time * Velocidad, DistanciaMovimiento * 2) - DistanciaMovimiento;
+        float x = Mathf.Sin(tiempoBatalla * Velocidad) * DistanciaMovimiento;
         transform.position = new Vector3(x, PosicionDestinoY, 0);
     }
 
@@ -77,13 +101,13 @@ public class BossBehav : MonoBehaviour
     {
         if (collision.CompareTag("Bullet")) 
         {
-            VidaTotal--;
+            VidaTotal -= _dañoBala;
             StartCoroutine(DamageFlash());
             Destroy(collision.gameObject);
 
             if (VidaTotal <= 0)
             {
-                SceneManager.LoadScene("MainMenu"); 
+                SceneManager.LoadScene(4); 
                 Destroy(gameObject);
             }
         }
